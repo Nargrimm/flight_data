@@ -12,9 +12,9 @@ def log_str(str_):
 
 
 def get_date_flight_airport(airport_name, date):
-    
+
     log_str("START: Request departure for " + airport_name + " on date " + date.strftime("%d/%m/%Y"))
-    
+
     origin_info = f.get_airport_details(airport_name)
     log_str("Request details Done")
 
@@ -35,7 +35,7 @@ def get_date_flight_airport(airport_name, date):
             item["flight"]["airport"]["origin"]["origin_name"] = origin_name
             item["flight"]["airport"]["origin"]["position"] = {"longitude": origin_longitude, "latitude": origin_latitude}
             full_res.append(item)
-    
+
     log_str("Ignored " + str(ignored_counter) + " flights for airport " + airport_name)
 
     log_str("FINISH: Request departure for " + airport_name + " on date " + date.strftime("%d/%m/%Y"))
@@ -44,7 +44,7 @@ def get_date_flight_airport(airport_name, date):
 
 def log_airport_flight(airport_name, date):
     flights = get_date_flight_airport(airport_name, date)
-    pathname = "airport/" + airport_name + "/"
+    pathname = "./airport/" + airport_name + "/"
     filename =  pathname + date.strftime("%d_%m_%Y") +".json"
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, "w") as output:
