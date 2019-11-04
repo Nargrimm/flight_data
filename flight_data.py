@@ -1,10 +1,12 @@
+#!/usr/bin/env python3
+
 import datetime
 import json
 import os
 import time
-
+import traceback
 from pyflightdata import FlightData
-f = FlightData()
+
 
 def log_str(str_):
     ts = datetime.datetime.now()
@@ -95,10 +97,16 @@ def log_airport_flight(airport_name, date):
     with open(filename, "w") as output:
         output.write(json.dumps(flights_arr, indent=4))
 
+if __name__ == "__main__":
+    f = FlightData()
 
-top_10_airport = ["ATL", "PEK", "DXB", "LAX", "HND", "ORD", "LHR", "HKA", "PVG", "CDG"]
+    top_10_airport = ["ATL", "PEK", "DXB", "LAX", "HND", "ORD", "LHR", "HKA", "PVG", "CDG"]
 
-for airport in top_10_airport:
-    log_airport_flight(airport, datetime.date.today())
-    #Avoid DOS the API we have all the time in the world
-    time.sleep(5)
+    for airport in top_10_airport:
+        try:
+            log_airport_flight(airport, datetime.date.today())
+        except:
+            print("Error while getting flight for airport: " + airport)
+            traceback.print_exc()
+        #Avoid DOS the API we have all the time in the world
+        time.sleep(5)
