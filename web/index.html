@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>deck.gl GreatCircleLayer Example</title>
+
+		<script src="https://unpkg.com/deck.gl@^7.0.0/dist.min.js"></script>
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+
+		<link href='style.css' rel='stylesheet' />
+	</head>
+
+	<body>
+		<header>
+			<select id="direction_select">
+				<option value="departures">Departures</option>
+				<option value="arrivals">Arrivals</option>
+			</select>
+			<select id="airport_select" disabled>
+				<option value="" selected disabled>Airport</option>
+			</select>
+			<select id="date_select" disabled></select>
+		</header>
+		<div id="tooltip"></div>
+		<div id="map_container"></div>
+	</body>
+
+	<script type="text/javascript" src="index.js"></script>
+</html>
