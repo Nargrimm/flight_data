@@ -1,0 +1,48 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+	<meta charset="utf-8">
+	<title>Flight Tracer</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="css/normalize.css" />
+	<link rel="stylesheet" href="css/main.css" />
+	<link href='css/choices.min.css' rel='stylesheet' />
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+	<!--[if IE]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+
+	<header id="airport_input">
+		<div id="direction_container">
+			<label for="direction_radio_departures">
+				<input type="radio" id="direction_radio_departures" name="direction_radio" value="departures" checked>
+				<button>Departures</button>
+			</label>
+			<label for="direction_radio_arrivals">
+				<input type="radio" id="direction_radio_arrivals" name="direction_radio" value="arrivals">
+				<button>Arrivals</button>
+			</label>
+		</div>
+		<select id="airport_select"  placeholder="Airport" disabled></select>
+		<select id="date_select" disabled></select>
+	</header>
+
+	<div id="map_container">
+		<div id="tooltip"></div>
+	</div>
+
+	<script src="https://unpkg.com/deck.gl@^7.0.0/dist.min.js"></script>
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/choices.min.js"></script>
+	<script src="js/modernizr-3.7.1.min.js"></script>
+	<script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
