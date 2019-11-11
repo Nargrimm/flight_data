@@ -88,14 +88,14 @@ def log_airport_flight(airport_name, date):
     filename =  pathname + "departures_" + date.strftime("%d_%m_%Y") +".json"
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, "w") as output:
-        output.write(json.dumps(flights_dep, indent=4))
+        output.write(json.dumps(flights_dep))
 
     flights_arr = get_date_flight_airport_arrival(airport_name, date)
     pathname = "./airport/" + airport_name  + "/"
     filename =  pathname + "arrivals_" + date.strftime("%d_%m_%Y") +".json"
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, "w") as output:
-        output.write(json.dumps(flights_arr, indent=4))
+        output.write(json.dumps(flights_arr))
 
 if __name__ == "__main__":
     f = FlightData()
