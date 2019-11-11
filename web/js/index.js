@@ -12,7 +12,7 @@ function updateTooltip({x, y, object}) {
 
 let deck_gl;
 
-fetch('mapbox_token.txt')
+fetch('../data/mapbox_token.txt')
 .then(function (response) {
 	return response.text();
 })
@@ -70,7 +70,8 @@ const update_date_select = function(){
 
 // Update the map with data from a certain JSON
 const update_map = function(){
-	airport_data_json_selected = date_Choices.getValue().value;
+	// prepend "../" because now the data are within the data folder
+	airport_data_json_selected = '../' + date_Choices.getValue().value;
 
 	if(airport_data_json_selected == ''){
 		// No data for those selected options
@@ -115,7 +116,7 @@ const init = function(){
 	date_select.addEventListener('change', update_map)
 
 	// Fetch data to hydrate <select>
-	fetch('data.json')
+	fetch('../data/data.json')
 	.then(function (response) {
 		return response.json();
 	})
