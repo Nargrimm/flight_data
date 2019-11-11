@@ -10,17 +10,25 @@ function updateTooltip({x, y, object}) {
 	} else tooltip.innerText = '';
 }
 
-const deck_gl = new DeckGL({
-	container: 'map_container',
-	mapboxApiAccessToken: '***REMOVED***',
-	mapStyle: 'mapbox://styles/mapbox/dark-v10',
-	longitude: -3,
-	latitude: 33,
-	zoom: 3,
-	maxZoom: 20,
-	pitch: 30,
-	bearing: 0
-});
+let deck_gl;
+
+fetch('mapbox_token.txt')
+.then(function (response) {
+	return response.text();
+})
+.then(function (mapbox_token) {
+	deck_gl = new DeckGL({
+		container: 'map_container',
+		mapboxApiAccessToken: mapbox_token,
+		mapStyle: 'mapbox://styles/mapbox/dark-v10',
+		longitude: -3,
+		latitude: 33,
+		zoom: 3,
+		maxZoom: 20,
+		pitch: 30,
+		bearing: 0
+	});
+})
 
 // Find the selected radio for direction
 const getSelectedDirection = function(){
@@ -33,12 +41,19 @@ let airport_data = {};
 const update_date_select = function(){
 	// Clear option for date, to update them
 	date_Choices.disable();
+	date_Choices.clearStore();
 	airport_selected = airport_Choices.getValue().value;
 	direction_selected = getSelectedDirection();
 
+	// Unhide date select
+	airport_Choices.containerOuter.element.classList.remove('is_last');
+	date_Choices.containerOuter.element.classList.remove('hidden');
+
 	if(airport_selected == '' || !(airport_selected in airport_data && direction_selected in airport_data[airport_selected])){
 		// No data for those selected options
-		return
+		const choices_list = [{ value: '', label: 'No date availaible', disabled: true, selected: true }]
+		date_Choices.setChoices(choices_list, 'value', 'label', true);
+		return;
 	}
 
 	const choices_list = airport_data[airport_selected][direction_selected].map(opt_data => ({
@@ -49,8 +64,6 @@ const update_date_select = function(){
 
 	// Replace date choices
 	date_Choices.setChoices(choices_list, 'value', 'label', true);
-	airport_Choices.containerOuter.element.classList.remove('is_last');
-	date_Choices.containerOuter.element.classList.remove('hidden');
 	date_Choices.enable();
 	update_map();
 };
